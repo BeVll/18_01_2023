@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <p>First [p]</p>
+    <hr>
+    <p class="intro">Second & intro [p]</p>
+    <hr>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+    <hr>
+    <a href="">Link [a]</a>
+    <a href="" target="_blank">_blank</a>
+    <hr>
+    <table cellspacing="2">
+        <tr>
+            <td>Row 1 Col 1</td>
+            <td>Row 1 Col 2</td>
+            <td>Row 1 Col 2</td>
+        </tr>
+        <tr>
+            <td>Row 2 Col 1</td>
+            <td>Row 2 Col 2</td>
+            <td>Row 2 Col 2</td>
+        </tr>
+        <tr>
+            <td>Row 3 Col 1</td>
+            <td>Row 3 Col 2</td>
+            <td>Row 3 Col 2</td>
+        </tr>
+    </table>
+
+    <button id="btn1">$("*")</button>
+    <button id="btn2">$(this)</button>
+    <button id="btn3">$("p.intro")</button>
+    <button id="btn4">$("p:first")</button>
+    <button id="btn5">$("ul li:first")</button>
+    <button id="btn6">$("ul li:first-child")</button>
+    <button id="btn7">$("[href]")</button>
+    <button id="btn8">$("a[target='_blank']")</button>
+    <button id="btn9">$("a[target!='_blank']")</button>
+    <button id="btn10">$(":button")</button>
+    <button id="btn11">$("tr:even")</button>
+    <button id="btn12">$("tr:odd")</button>
+    <br>
+    <br>
+    <hr>
+    <hr>
+    <br>
+    <h2>Task 2</h2>
+    <div class="windows">
+        <div class="win1">
+            <span>Window 1</span>
+            <div class="obj1"></div>
+        </div>
+        <div class="win2">
+            <span>Window 2</span>
+            <div class="obj2"></div>
+        </div>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js">
+    </script>
+    <script>
+        $(".obj1").mousedown(function(){  
+            $(".obj1").mousemove(function(event) {
+                $(".obj1").css( "left", event.pageX - $(this).parent().offset().left);
+                $(".obj1").css( "top", event.pageY - $(this).parent().offset().top);
+                
+            });
+        });
+        $(document).keypress(function(event) {
+            console.log(event.which);
+            if ( event.which == 97 ) {
+                event.preventDefault();
+                let l = $(".obj2").position().left;
+                $(".obj2").css( "left", l-5);
+            }
+            else if ( event.which == 100 ) {
+                    let l = $(".obj2").position().left;
+                    $(".obj2").css( "left", l+5);
+            }
+            else if ( event.which == 119 ) {
+                    let l = $(".obj2").position().top;
+                    $(".obj2").css( "top", l-5);
+            }
+            else if ( event.which == 115 ) {
+                    let l = $(".obj2").position().top;
+                    $(".obj2").css( "top", l+5);
+            }
+        });
+
+
+        $(document).ready(function(){
+            $("#btn1").click(function(){
+                $("*").hide();
+                
+            });
+        });
+        $(document).ready(function(){
+            $("#btn2").click(function(){
+                $(this).hide();
+                
+            });
+        });
+        $(document).ready(function(){
+            $("#btn3").click(function(){
+                $("p.intro").hide();
+                
+            });
+        });
+        $(document).ready(function(){
+            $("#btn4").click(function(){
+                $("p:first").hide();
+            });
+        });
+        $(document).ready(function(){
+            $("#btn5").click(function(){
+                $("ul li:first").hide();
+            });
+        });
+        $(document).ready(function(){
+            $("#btn6").click(function(){
+                $("ul li:first-child").hide();
+            });
+        });
+        $(document).ready(function(){
+            $("#btn7").click(function(){
+                $("[href]").hide();
+            });
+        });
+        $(document).ready(function(){
+            $("#btn8").click(function(){
+                $("a[target='_blank']").hide();
+            });
+        });
+        $(document).ready(function(){
+            $("#btn9").click(function(){
+                $("a[target!='_blank']").hide();
+            });
+        });
+        $(document).ready(function(){
+            $("#btn10").click(function(){
+                $(":button").hide();
+            });
+        });
+        $(document).ready(function(){
+            $("#btn11").click(function(){
+                $("tr:even").hide();
+            });
+        });
+        $(document).ready(function(){
+            $("#btn12").click(function(){
+                $("tr:odd").hide();
+            });
+        });
+    </script>
+</body>
+</html>
