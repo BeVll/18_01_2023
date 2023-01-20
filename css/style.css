@@ -113,7 +113,7 @@ tr:nth-child(2){
     position: absolute;
 }
 
-.obj1{
+#obj1{
     height: 15%;
     width: 15%;
     background-color: rgb(108, 160, 238);
@@ -121,8 +121,20 @@ tr:nth-child(2){
 }
 
 .obj2{
-    height: 15%;
-    width: 15%;
+    height: 30px;
+    width: 150px;
     background-color: rgb(108, 160, 238);
     position: absolute;
+    bottom: 0;
+    left: 50%;
+}
+#ball{
+    position: absolute;
+    left: 50%;
+    right: 50%;
+    height: 40px;
+    width: 40px;
+    background-color: red;
+    border-radius: 50%;
+
 }

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="css/style.css">
+    
 </head>
 <body>
     <p>First [p]</p>
@@ -62,42 +63,140 @@
     <div class="windows">
         <div class="win1">
             <span>Window 1</span>
-            <div class="obj1"></div>
+            <div id="obj1"></div>
         </div>
         <div class="win2">
             <span>Window 2</span>
             <div class="obj2"></div>
+            <div id="ball"></div>
         </div>
     </div>
     
-    <script src="https://code.jquery.com/jquery-3.6.3.min.js">
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+
     </script>
     <script>
-        $(".obj1").mousedown(function(){  
-            $(".obj1").mousemove(function(event) {
-                $(".obj1").css( "left", event.pageX - $(this).parent().offset().left);
-                $(".obj1").css( "top", event.pageY - $(this).parent().offset().top);
+        function randomIntFromInterval(min, max) { // min and max included 
+            return Math.floor(Math.random() * (max - min + 1) + min)
+        }
+        function sleep2(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+        $(async function move_ball(){
+            let start = true;
+            let rand_x = 0.00;
+            let rand_y = 0.00;
+            while(true){
                 
-            });
+
+                    if(start == true){
+                    // rand_x = ra
+                    rand_y = Math.floor((Math.random() * 1));
+                    console.log(Math.floor(((Math.random() * (1.000 - 0.0000) + 0.0000).toFixed(4))));
+                    }
+                    let l = $("#ball").position().left;
+                    let t = $("#ball").position().top;
+                    $("#ball").css( "left", l + rand_x);
+                    $("#ball").css( "top", t + rand_y);
+                    console.log(l+":"+t+" "+rand_x+":"+rand_y);
+                    await sleep2(1000);
+                
+            }
+            
         });
+
+
+        $(function() {
+            
+
+            var isDragging = false;
+            $("#obj1")
+            .mousedown(function() {
+                isDragging = true;
+            })
+            .mousemove(function(event) {
+                if(isDragging != false){
+                    isDragging = true;
+                    if(event.pageX - $(this).parent().offset().left - ($(this).width()/2) >= 0 && event.pageY - $(this).parent().offset().top  - ($(this).height()/2) >= 0 && event.pageY - $(this).parent().offset().top  + ($(this).height()/2) <= $(".win1").height() && event.pageX - $(this).parent().offset().left  + ($(this).width()/2) <= $(".win1").width()){
+                        $("#obj1").css( "left", event.pageX - $(this).parent().offset().left - ($(this).width()/2));
+                        $("#obj1").css( "top", event.pageY - $(this).parent().offset().top - ($(this).height()/2));
+                    }
+                    
+                }
+                
+            })
+            .mouseup(function() {
+                var wasDragging = isDragging;
+                isDragging = false;
+                $("#obj1").css( "left", 0);
+                $("#obj1").css( "top", 0);
+            });
+
+         
+        });
+        // $("#obj1").mousedown(function(event){
+        //     $( "#obj1" ).mousemove(function( event ) {
+        //         $("#obj1").css( "left", event.pageX - $(this).parent().offset().left - ($(this).width()/2));
+        //         $("#obj1").css( "top", event.pageY - $(this).parent().offset().top - ($(this).height()/2));
+        //         $("#obj1").mouseup(function(event){
+        //             console.log(1);
+        //             $("#obj1").css( "left", 0);
+        //             $("#obj1").css( "top", 0);
+        //             $("#obj1").off("mousemove", event);
+                  
+                    
+        //         })
+        //     });
+            
+        // })
+        
         $(document).keypress(function(event) {
             console.log(event.which);
             if ( event.which == 97 ) {
                 event.preventDefault();
-                let l = $(".obj2").position().left;
-                $(".obj2").css( "left", l-5);
+                for (let i = 0; i < 5; i++) {
+                    let l = $(".obj2").position().left;
+                    if(l <= 0){
+                        break;
+                    }
+                    else{
+                        $(".obj2").css( "left", l-1);
+                    }
+                }
+                
             }
             else if ( event.which == 100 ) {
+                for (let i = 0; i < 5; i++) {
                     let l = $(".obj2").position().left;
-                    $(".obj2").css( "left", l+5);
+                    if(l >= $(".win2").width()-$(".obj2").width()){
+                        break;
+                    }
+                    else{
+                        $(".obj2").css( "left", l+1);
+                    }
+                }
             }
             else if ( event.which == 119 ) {
+                for (let i = 0; i < 5; i++) {
                     let l = $(".obj2").position().top;
-                    $(".obj2").css( "top", l-5);
+                    if(l <= 0){
+                        break;
+                    }
+                    else{
+                        $(".obj2").css( "top", l-1);
+                    }
+                }
             }
             else if ( event.which == 115 ) {
+                for (let i = 0; i < 5; i++) {
                     let l = $(".obj2").position().top;
-                    $(".obj2").css( "top", l+5);
+                    if(l >= $(".win2").height()-$(".obj2").height()){
+                        break;
+                    }
+                    else{
+                        $(".obj2").css( "top", l+1);
+                    }
+                }
             }
         });
 
